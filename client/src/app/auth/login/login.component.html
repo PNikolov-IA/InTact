@@ -1,12 +1,11 @@
 <!-- Reactive (Model driven) forms -->
-<div class="main-content">
+<div class="main-content vertical-center">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="card">
           <div class="card-header card-header-danger">
             <h4 class="card-title">Login</h4>
-            <p class="card-category">Log in for full data success</p>
           </div>
           <div class="card-body">
             <!-- <form>
@@ -25,6 +24,21 @@
                 <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
               </form>
             </form> -->
+            <!---->
+              <form>
+                <div class="form-group">
+                  <label ></label>
+                  <input required id="email" type="text" class="form-control" placeholder="email..." />
+                  <div hidden>Required</div>
+                </div>
+                <div class="form-group">
+                  <label></label>
+                  <input required id="password" type="password" class="form-control" placeholder="Password..." />
+                </div>
+                <button type="submit" class="btn btn-danger">Login</button>
+                <button type="button" class="btn btn-default" [routerLink]="['/']">Cancel</button>
+              </form>
+            <!---->
           </div>
         </div>
       </div>
