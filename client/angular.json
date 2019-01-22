@@ -22,7 +22,6 @@
             ],
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
-              "node_modules/toastr/build/toastr.min.css",
               "src/assets/scss/material-dashboard.scss",
               "src/assets/css/demo.css"
             ],

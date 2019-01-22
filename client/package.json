@@ -31,7 +31,6 @@
     "@angular/platform-server": "7.0.2",
     "@angular/router": "7.0.2",
     "ajv": "6.4.0",
-    "angular-toastr": "^2.1.1",
     "arrive": "2.4.1",
     "bootstrap": "4.1.0",
     "bootstrap-material-design": "4.1.1",
@@ -48,17 +47,13 @@
     "popper.js": "1.14.3",
     "rxjs": "6.3.3",
     "rxjs-compat": "6.3.3",
-    "sass": "^1.16.0",
-    "toastr": "^2.1.4",
     "web-animations-js": "2.3.1",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.6.3",
     "@angular/cli": "6.0.3",
     "@angular/compiler-cli": "7.0.2",
     "@angular/language-service": "7.0.2",
-    "@types/angular-toastr": "^1.6.34",
     "@types/bootstrap": "3.3.32",
     "@types/chartist": "0.9.34",
     "@types/googlemaps": "3.30.8",
@@ -73,10 +68,10 @@
     "karma-cli": "1.0.1",
     "karma-coverage-istanbul-reporter": "1.4.2",
     "karma-jasmine": "1.1.1",
-    "node-sass": "^4.11.0",
-    "protractor": "^5.4.2",
+    "protractor": "5.3.1",
     "ts-node": "5.0.1",
     "tslint": "5.9.1",
-    "typescript": "3.1.6"
+    "typescript": "3.1.6",
+    "@angular-devkit/build-angular": "~0.6.3"
   }
 }

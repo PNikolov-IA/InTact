@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificatorService } from '../core/notificator.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,12 +7,9 @@ import { NotificatorService } from '../core/notificator.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(
-    private readonly notificator: NotificatorService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.notificator.success('Welcome to user details!');
   }
 
 }

@@ -1,3 +1,4 @@
+import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,11 +23,14 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
-    CoreModule,
+    SharedModule,
+    AuthModule,
+
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
@@ -40,6 +44,7 @@ import { CoreModule } from './core/core.module';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    HomeComponent,
 
   ],
   providers: [],

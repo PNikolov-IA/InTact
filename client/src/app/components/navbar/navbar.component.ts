@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+    title = 'InTact'
     private listTitles: any[];
     location: Location;
       mobile_menu_visible: any = 0;
