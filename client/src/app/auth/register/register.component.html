@@ -1,47 +1,29 @@
-<!-- Reactive (Model driven) forms -->
 <div class="main-content vertical-center">
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-header card-header-danger">
-            <h4 class="card-title">Register</h4>
-          </div>
-          <div class="card-body">
-            <!-- <form>
-              <form [formGroup]="loginForm" (ngSubmit)="this.login()">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Register</h4>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="registerForm" (ngSubmit)="this.register()">
                 <div class="form-group">
                   <label appBoldMe for="email"></label>
                   <input formControlName="email" required id="email" type="text" class="form-control" placeholder="email..." />
-                  <div [hidden]="!(this.loginForm.get('email').hasError('required') && this.loginForm.dirty)">Required</div>
+                  <div [hidden]="!(this.registerForm.get('email').hasError('required') && this.registerForm.dirty)">Required</div>
                 </div>
                 <div class="form-group">
                   <label appBoldMe for="password"></label>
                   <input #pass formControlName="password" required id="password" type="password" class="form-control"
                     placeholder="Password..." />
                 </div>
-                <button [disabled]="pass.value.length <= 5" type="submit" class="btn btn-danger">Login</button>
+                <button [disabled]="pass.value.length <= 5" type="submit" class="btn btn-danger">Register</button>
                 <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
               </form>
-            </form> -->
-            <!---->
-            <form>
-              <div class="form-group">
-                <label></label>
-                <input required id="email" type="text" class="form-control" placeholder="email..." />
-                <div hidden>Required</div>
-              </div>
-              <div class="form-group">
-                <label></label>
-                <input required id="password" type="password" class="form-control" placeholder="Password..." />
-              </div>
-              <button type="submit" class="btn btn-danger">Login</button>
-              <button type="button" class="btn btn-default" [routerLink]="['/']">Cancel</button>
-            </form>
-            <!---->
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

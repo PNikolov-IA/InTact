@@ -25,11 +25,13 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   imports: [
     SharedModule,
     AuthModule,
+    CoreModule,
 
     BrowserAnimationsModule,
     FormsModule,
