@@ -1,4 +1,4 @@
-<div class="main-content vertical-center">
+<div class="main-content vertical-center fullscreen">
     <div class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-md-4">
@@ -10,13 +10,13 @@
               <form [formGroup]="registerForm" (ngSubmit)="this.register()">
                 <div class="form-group">
                   <label appBoldMe for="email"></label>
-                  <input formControlName="email" required id="email" type="text" class="form-control" placeholder="email..." />
+                  <input formControlName="email" required id="email" type="text" class="form-control" placeholder="Email" />
                   <div [hidden]="!(this.registerForm.get('email').hasError('required') && this.registerForm.dirty)">Required</div>
                 </div>
                 <div class="form-group">
                   <label appBoldMe for="password"></label>
                   <input #pass formControlName="password" required id="password" type="password" class="form-control"
-                    placeholder="Password..." />
+                    placeholder="Password" />
                 </div>
                 <button [disabled]="pass.value.length <= 5" type="submit" class="btn btn-danger">Register</button>
                 <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>

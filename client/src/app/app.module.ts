@@ -26,6 +26,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -47,9 +49,14 @@ import { CoreModule } from './core/core.module';
     AppComponent,
     AdminLayoutComponent,
     HomeComponent,
-
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

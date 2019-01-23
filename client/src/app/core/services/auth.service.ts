@@ -21,17 +21,13 @@ export class AuthService {
     }
 
     register(userData: UserLoginDTO): Observable<any> {
-        const headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-
         return this.httpClient
-            .post('http://localhost:3000/register', JSON.stringify(userData), { headers })
+            .post('http://localhost:3000/register', JSON.stringify(userData))
     }
 
     login(userData: UserLoginDTO): Observable<string> {
-        const headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-
         return this.httpClient
-            .post<string>('http://localhost:3000/login', JSON.stringify(userData), { headers })
+            .post<string>('http://localhost:3000/login', JSON.stringify(userData))
             .pipe(
                 tap((response) => {
                     this.storageService.setItem('jwtToken', response);

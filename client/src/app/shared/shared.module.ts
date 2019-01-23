@@ -9,7 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     RouterModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      closeButton: true,
+      timeOut: 5000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
   ],
   exports: [
     CommonModule,
