@@ -36,12 +36,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     this.subscription = this.authService
       .login(this.loginForm.value)
-      .subscribe(data => {
+      .subscribe(() => {
         this.toastrService.success('Logged in successfully!');
         this.router.navigate(['/dashboard']);
       },
       error => {
-        console.log(error.statusText);
         this.toastrService.error('Login failed!');
       });
   }

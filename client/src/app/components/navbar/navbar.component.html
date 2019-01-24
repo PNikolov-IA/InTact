@@ -24,7 +24,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a [hidden]="isLogged()" class="dropdown-item" [routerLink]="['/login']">Login</a>
                         <a [hidden]="isLogged()" class="dropdown-item" [routerLink]="['/register']">Register</a>
-                        <a [hidden]="!isLogged()" class="dropdown-item" [routerLink]="['/']">Logout</a>
+                        <a [hidden]="!isLogged()" class="dropdown-item" (click)="this.logout()" [routerLink]="['/']">Logout</a>
                     </div>
                 </li>
             </ul>
