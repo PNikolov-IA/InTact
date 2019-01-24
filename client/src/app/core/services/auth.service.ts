@@ -42,6 +42,6 @@ export class AuthService {
     }
 
     private hasToken(): boolean {
-        return !!this.storageService.getItem('token');
+        return !!this.storageService.getItem('jwtToken');
     }
 }

@@ -18,7 +18,6 @@ export class AnonymousGuardService implements CanActivate {
             .isLoggedIn$()
             .pipe(
                 map((isLogged: boolean) => {
-                    console.log(isLogged);
                     if (isLogged) {
                         this.router.navigate(['dashboard']);
                         this.toastrService.error(

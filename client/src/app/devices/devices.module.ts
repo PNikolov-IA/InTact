@@ -2,6 +2,7 @@ import { DevicesRoutingModule } from './devices-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { DeviceListComponent } from './device-list/device-list.component';
+import { DeviceFormComponent } from './device-form/device-form.component';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import { DeviceListComponent } from './device-list/device-list.component';
     DevicesRoutingModule,
   ],
   declarations: [
-    DeviceListComponent
+    DeviceListComponent,
+    DeviceFormComponent
   ]
 })
 export class DevicesModule { }
