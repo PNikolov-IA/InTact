@@ -1,9 +1,9 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { UserLoginDTO } from '../input-models/user-login.model';
+import { UserLoginDTO } from '../models/input-models/user-login.model';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
 
     public constructor(
         private readonly httpClient: HttpClient,
-        private readonly storageService: StorageService,
+        private readonly storageService: StorageService
     ) { }
 
     public isLoggedIn$(): Observable<boolean> {

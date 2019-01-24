@@ -1,11 +1,26 @@
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { DevicesService } from './services/devices.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AnonymousGuardService } from './guards/anonymous.guard';
+import { AuthGuardService } from './guards/auth.guard';
+import { RoleGuardService } from './guards/admin.guard';
 
 @NgModule({
   providers: [
     AuthService,
     StorageService,
+    DevicesService,
+    AnonymousGuardService,
+    AuthGuardService,
+    RoleGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ]
 })
 export class CoreModule {
