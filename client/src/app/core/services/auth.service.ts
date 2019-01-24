@@ -20,14 +20,14 @@ export class AuthService {
         return this.isLoggedInSubject$.asObservable();
     }
 
-    register(userData: UserLoginDTO): Observable<any> {
+    register(user: UserLoginDTO): Observable<string> {
         return this.httpClient
-            .post('http://localhost:3000/register', JSON.stringify(userData))
+            .post<string>('http://localhost:3000/register', JSON.stringify(user))
     }
 
-    login(userData: UserLoginDTO): Observable<string> {
+    login(user: UserLoginDTO): Observable<string> {
         return this.httpClient
-            .post<string>('http://localhost:3000/login', JSON.stringify(userData))
+            .post<string>('http://localhost:3000/login', JSON.stringify(user))
             .pipe(
                 tap((response) => {
                     this.storageService.setItem('jwtToken', response);

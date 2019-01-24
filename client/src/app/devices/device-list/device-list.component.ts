@@ -1,6 +1,6 @@
 import { DevicesService } from './../../core/services/devices.service';
 import { Component, OnInit } from '@angular/core';
-import { DeviceDTO } from 'app/core/models/view-models/device.model';
+import { DeviceViewModel } from 'app/core/models/view-models/device.model';
 
 @Component({
   selector: 'app-device-list',
@@ -8,7 +8,7 @@ import { DeviceDTO } from 'app/core/models/view-models/device.model';
   styleUrls: ['./device-list.component.scss']
 })
 export class DeviceListComponent implements OnInit {
-  devices: DeviceDTO[]
+  devices: DeviceViewModel[]
 
   constructor(
     private readonly devicesService: DevicesService
@@ -18,7 +18,8 @@ export class DeviceListComponent implements OnInit {
     this.devicesService
       .all()
       .subscribe(data => {
-        console.log(data);
+        this.devices = data;
+        console.log(this.devices[0].id);
       })
   }
 }
