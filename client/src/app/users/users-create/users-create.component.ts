@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersCreateDTO } from '../../core/input-models/users-create.model';
 import { UsersCreateService } from '../../core/services/users-create.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

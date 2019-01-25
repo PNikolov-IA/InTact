@@ -1,4 +1,3 @@
-import { AuthGuardService } from './core/guards/auth.guard';
 import { AnonymousGuardService } from './core/guards/anonymous.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -48,7 +47,6 @@ const routes: Routes = [
         loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
       }]
   },
-
   {
     path: 'users',
     component: AdminLayoutComponent,

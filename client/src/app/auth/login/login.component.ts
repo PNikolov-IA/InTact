@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.toastrService.success('Logged in successfully!');
         this.router.navigate(['/dashboard']);
       },
-      error => {
+      () => {
         this.toastrService.error('Login failed!');
       });
   }
