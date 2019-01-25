@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UsersService } from '../../core/services/users.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UsersService } from '../../core/services/users.service';
 
 @Component({
-  selector: 'app-users-create',
-  templateUrl: './users-create.component.html',
-  styleUrls: ['./users-create.component.scss']
+  selector: 'app-users-edit',
+  templateUrl: './users-edit.component.html',
+  styleUrls: ['./users-edit.component.scss']
 })
-export class UsersCreateComponent implements OnInit {
+export class UsersEditComponent implements OnInit {
   createForm: FormGroup;
   private subscription;
+
 
   constructor(
     private usersService: UsersService,
@@ -35,17 +36,22 @@ export class UsersCreateComponent implements OnInit {
     }
   }
 
-  createUser() {
+  refresh(url: string) {
+    this.router.navigate([url]);
+    this.ngOnInit();
+  }
+
+  editUser() {
     this.subscription = this.usersService
-      .createUser(this.createForm.value)
+      .editUser(this.createForm.value)
       .subscribe(
         () => {
           this.toastrService.success('Created successfully!');
-          this.router.navigate(['/users/all']);
+          this.refresh('/users/all');
         },
         () => {
           this.toastrService.error('Registration failed!');
-          this.router.navigate(['/users/all']);
+          this.refresh('/users/all');
         });
   }
 

@@ -1,0 +1,29 @@
+<div class="main-content vertical-center fullscreen">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">User edit info</h4>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="editForm" (ngSubmit)="this.editUser()">
+                <div class="form-group">
+                  <label appBoldMe for="email"></label>
+                  <input formControlName="email" required id="email" type="text" class="form-control" placeholder="Email" />
+                  <div [hidden]="!(this.editForm.get('email').hasError('required') && this.editForm.dirty)">Required</div>
+                </div>
+                <div class="form-group">
+                  <label appBoldMe for="password"></label>
+                  <input #pass formControlName="password" required id="password" type="password" class="form-control"
+                    placeholder="Password" />
+                </div>
+                <button [disabled]="pass.value.length <= 5" type="submit" class="btn btn-danger">edit</button>
+                <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

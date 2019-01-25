@@ -1,21 +1,19 @@
-import { UsersRetrieveService } from './services/users-retrieve.service';
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { UsersCreateService } from './services/users-create.service';
 import { DevicesService } from './services/devices.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AnonymousGuardService } from './guards/anonymous.guard';
 import { AuthGuardService } from './guards/auth.guard';
 import { RoleGuardService } from './guards/admin.guard';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   providers: [
     AuthService,
     StorageService,
-    UsersCreateService,
-    UsersRetrieveService,
+    UsersService,
     DevicesService,
     AnonymousGuardService,
     AuthGuardService,
@@ -27,6 +25,7 @@ import { RoleGuardService } from './guards/admin.guard';
     },
   ]
 })
+
 export class CoreModule {
   public constructor(@Optional() @SkipSelf() parent: CoreModule) {
       if (parent) {

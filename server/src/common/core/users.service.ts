@@ -70,10 +70,10 @@ export class UsersService {
     return result;
   }
 
-  async deleteUser(user, req): Promise<any> {
+  async deleteUser(email, req): Promise<any> {
 
     const userFound = await this.usersRepository
-            .findOne({ where: { email: user.email, adminUser: req } });
+            .findOne({ where: { email, adminUser: req } });
 
     if (!userFound) {
       throw new Error('User doesnt exists');

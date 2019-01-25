@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnDestroy } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UsersCreateComponent } from './users-create/users-create.component';

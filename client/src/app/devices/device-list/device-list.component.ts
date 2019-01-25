@@ -19,7 +19,7 @@ export class DeviceListComponent implements OnInit {
       .all()
       .subscribe(data => {
         this.devices = data;
-        console.log(this.devices[0].id);
+        console.log(this.devices);
       })
   }
 }

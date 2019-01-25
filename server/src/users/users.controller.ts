@@ -20,8 +20,9 @@ export class UsersController {
 
   @Post()
   @UseGuards(AuthGuard(), AdminGuard)
-  async addUser(@Request() req,
-                @Body(new ValidationPipe({
+  async addUser(
+    @Request() req,
+    @Body(new ValidationPipe({
 
       transform: true,
       whitelist: true,
@@ -38,15 +39,15 @@ export class UsersController {
 
   @Delete()
   @UseGuards(AuthGuard(), AdminGuard)
-  async delete(@Request() req,
-               @Body(new ValidationPipe({
+  async delete(
+    @Request() req,
+    @Body(new ValidationPipe({
       transform: true,
       whitelist: true,
     }))
-    email): Promise<string> {
-
+    inputEmail): Promise<string> {
     try {
-      await this.usersService.deleteUser(email, req.user);
+      await this.usersService.deleteUser(inputEmail.email, req.user);
       return JSON.stringify('User deleted!');
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.CONFLICT);
@@ -55,8 +56,9 @@ export class UsersController {
 
   @Put()
   @UseGuards(AuthGuard())
-  async changePassword(@Request() req,
-                       @Body(new ValidationPipe({
+  async changePassword(
+    @Request() req,
+    @Body(new ValidationPipe({
       transform: true,
       whitelist: true,
     }))
