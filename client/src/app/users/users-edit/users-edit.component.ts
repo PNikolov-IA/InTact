@@ -38,22 +38,17 @@ export class UsersEditComponent implements OnInit {
     }
   }
 
-  refresh(url: string) {
-    this.router.navigate([url]);
-    this.ngOnInit();
-  }
-
   editUser() {
     this.subscription = this.usersService
       .editUser(this.editForm.value)
       .subscribe(
         () => {
           this.toastrService.success('Successfully edited User!');
-          this.refresh('/users/all');
+          this.router.navigate(['/users/all']);
         },
         () => {
           this.toastrService.error('Editing failed!');
-          this.refresh('/users/all');
+          this.router.navigate(['/users/all']);
         });
   }
 

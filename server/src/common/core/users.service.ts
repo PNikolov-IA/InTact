@@ -68,7 +68,16 @@ export class UsersService {
   }
 
   async getAll(admin: User) {
-    return await this.usersRepository.find({ where: { adminUser: admin } });
+    const users = await this.usersRepository.find({ where: { adminUser: admin } });
+
+    const onlyUsers: User[] = [];
+    users.map((user) => {
+      if (user.email !== admin.email) {
+        return onlyUsers.push(user);
+      }
+    });
+
+    return onlyUsers;
   }
 
   async addUser(user: UserRegisterDTO, admin: User) {

@@ -1,5 +1,5 @@
 import { UserDeleteDTO } from './../../core/models/input-models/user-delete.dto';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../../core/services/users.service';
 import { ToastrService } from 'ngx-toastr';
@@ -37,16 +37,20 @@ export class UsersListComponent implements OnInit {
   }
 
   deleteUser(email: UserDeleteDTO) {
-    if (window.confirm('Are sure you want to delete this User ?')) {
+    if (window.confirm('Are sure you want to delete this User?')) {
       this.usersService
         .deleteUser(email)
         .subscribe(
           () => {
             this.toastrService.success('User successfully deleted!');
-            this.refresh('/users/all')
+            this.users.some((user, i) => {
+              if (user.email === email) {
+                this.users.splice(i, 1);
+              }
+            });
           }, () => {
             this.toastrService.error('Something goes wrong!');
-            this.refresh('/users/all');
+            this.router.navigate(['/users/all']);
           });
     }
   };
