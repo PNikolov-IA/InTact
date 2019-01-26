@@ -37,7 +37,6 @@ export class UsersListComponent implements OnInit {
   }
 
   deleteUser(email: UserDeleteDTO) {
-    if (window.confirm('Are sure you want to delete this User?')) {
       this.usersService
         .deleteUser(email)
         .subscribe(
@@ -52,6 +51,5 @@ export class UsersListComponent implements OnInit {
             this.toastrService.error('Something goes wrong!');
             this.router.navigate(['/users/all']);
           });
-    }
   };
 }
