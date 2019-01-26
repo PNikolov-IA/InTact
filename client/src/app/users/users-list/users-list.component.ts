@@ -37,15 +37,17 @@ export class UsersListComponent implements OnInit {
   }
 
   deleteUser(email: UserDeleteDTO) {
-    this.usersService
-      .deleteUser(email)
-      .subscribe(
-        () => {
-          this.toastrService.success('User successfully deleted!');
-          this.refresh('/users/all')
-        }, () => {
-          this.toastrService.error('Something goes wrong!');
-          this.refresh('/users/all');
-        });
+    if (window.confirm('Are sure you want to delete this User ?')) {
+      this.usersService
+        .deleteUser(email)
+        .subscribe(
+          () => {
+            this.toastrService.success('User successfully deleted!');
+            this.refresh('/users/all')
+          }, () => {
+            this.toastrService.error('Something goes wrong!');
+            this.refresh('/users/all');
+          });
+    }
   };
 }

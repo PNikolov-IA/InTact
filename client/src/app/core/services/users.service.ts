@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UsersCreateDTO } from '../models/input-models/user-create.model';
 import { UserDeleteDTO } from '../models/input-models/user-delete.dto';
-import { RequestOptions } from '@angular/http';
+import { UsersCreateDTO } from '../models/input-models/user-create.dto';
 
 @Injectable()
 export class UsersService {

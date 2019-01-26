@@ -3,7 +3,7 @@ import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { UserLoginDTO } from '../models/input-models/user-login.model';
+import { UserLoginDTO } from '../models/input-models/user-login.dto';
 
 @Injectable()
 export class AuthService {

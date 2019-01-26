@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./users-edit.component.scss']
 })
 export class UsersEditComponent implements OnInit {
-  createForm: FormGroup;
+  editForm: FormGroup;
   private subscription;
 
 
@@ -23,9 +23,11 @@ export class UsersEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.createForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+    this.editForm = this.formBuilder.group({
+      FirstName: ['', [Validators.required]],
+      LastName: ['', [Validators.required]],
+      email: ['dd'],
+      password: ['ddd']
     })
   }
 
@@ -43,14 +45,14 @@ export class UsersEditComponent implements OnInit {
 
   editUser() {
     this.subscription = this.usersService
-      .editUser(this.createForm.value)
+      .editUser(this.editForm.value)
       .subscribe(
         () => {
-          this.toastrService.success('Created successfully!');
+          this.toastrService.success('Successfully edited User!');
           this.refresh('/users/all');
         },
         () => {
-          this.toastrService.error('Registration failed!');
+          this.toastrService.error('Editing failed!');
           this.refresh('/users/all');
         });
   }

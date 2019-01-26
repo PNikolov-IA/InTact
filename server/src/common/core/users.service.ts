@@ -8,28 +8,43 @@ import { User } from './../../data/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './../../interfaces/jwt-payload';
+import { UserEditDTO } from '../../models/user/user-edit.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-    ) { }
+  ) { }
 
   async registerUser(user: UserRegisterDTO) {
     const userFound = await this.usersRepository.findOne({ where: { email: user.email } });
+
     if (userFound) {
       throw new Error('User already exists');
     }
-    const newuser = new User();
-    newuser.email = user.email;
-    newuser.password = await bcrypt.hash(user.password, 10);
-    newuser.isAdmin = true;
-    await this.usersRepository.create(newuser);
-    await this.usersRepository.save([newuser]);
-    const userSaved = await this.usersRepository.findOne({ where: { email: newuser.email } });
-    newuser.adminUser = userSaved;
-    const result = await this.usersRepository.save([newuser]);
+    const newUser = new User();
+    if (user.FirstName) {
+      newUser.FirstName = user.FirstName;
+    } else {
+      newUser.FirstName = null;
+    }
+
+    if (user.LastName) {
+      newUser.LastName = user.LastName;
+    } else {
+      newUser.LastName = null;
+    }
+
+    newUser.email = user.email;
+    newUser.password = await bcrypt.hash(user.password, 10);
+    newUser.isAdmin = true;
+
+    await this.usersRepository.create(newUser);
+    await this.usersRepository.save([newUser]);
+    const userSaved = await this.usersRepository.findOne({ where: { email: newUser.email } });
+    newUser.adminUser = userSaved;
+    const result = await this.usersRepository.save([newUser]);
 
     return result;
   }
@@ -61,19 +76,31 @@ export class UsersService {
     if (userFound) {
       throw new Error('User already exists');
     }
-    const newuser = new User();
-    newuser.email = user.email;
-    newuser.password = await bcrypt.hash(user.password, 10);
-    newuser.adminUser = admin;
-    await this.usersRepository.create(newuser);
-    const result = await this.usersRepository.save([newuser]);
+    const newUser = new User();
+    if (user.FirstName) {
+      newUser.FirstName = user.FirstName;
+    } else {
+      newUser.FirstName = null;
+    }
+
+    if (user.LastName) {
+      newUser.LastName = user.LastName;
+    } else {
+      newUser.FirstName = null;
+    }
+    newUser.email = user.email;
+    newUser.password = await bcrypt.hash(user.password, 10);
+    newUser.adminUser = admin;
+
+    await this.usersRepository.create(newUser);
+    const result = await this.usersRepository.save([newUser]);
     return result;
   }
 
   async deleteUser(email, req): Promise<any> {
 
     const userFound = await this.usersRepository
-            .findOne({ where: { email, adminUser: req } });
+      .findOne({ where: { email, adminUser: req } });
 
     if (!userFound) {
       throw new Error('User doesnt exists');
@@ -83,11 +110,29 @@ export class UsersService {
 
   }
 
+  async editUser(user: UserEditDTO, req): Promise<any> {
+
+    const userFound = await this.usersRepository
+      .findOne({ where: { email: user.email } });
+
+    if (userFound && (user.FirstName || user.LastName)) {
+      userFound.FirstName = user.FirstName;
+      userFound.LastName = user.LastName;
+    }
+    else {
+      throw new Error('No such user!');
+    }
+
+    // await this.usersRepository.create(newUser);
+    const result = await this.usersRepository.save(userFound);
+    return result;
+  }
+
   async changePassword(user: UserPasswordDTO, req): Promise<any> {
     const loggedUserId = req.user.id;
 
     const userFound = await this.usersRepository
-    .findOne({ where: { id: loggedUserId } });
+      .findOne({ where: { id: loggedUserId } });
 
     const result = await bcrypt.compare(user.oldPassword, userFound.password);
 
@@ -97,8 +142,6 @@ export class UsersService {
     else {
       throw new Error('password doesnt match');
     }
-
     await this.usersRepository.update(loggedUserId, userFound);
-
   }
 }

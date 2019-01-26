@@ -23,6 +23,8 @@ export class UsersCreateComponent implements OnInit {
 
   ngOnInit() {
     this.createForm = this.formBuilder.group({
+      FirstName: ['', [Validators.required]],
+      LastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]]
     })
@@ -36,6 +38,7 @@ export class UsersCreateComponent implements OnInit {
   }
 
   createUser() {
+    console.log(this.createForm.value);
     this.subscription = this.usersService
       .createUser(this.createForm.value)
       .subscribe(

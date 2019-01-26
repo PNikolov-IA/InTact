@@ -1,5 +1,5 @@
 import { Column, PrimaryGeneratedColumn, Entity, ManyToMany, JoinTable, ManyToOne, OneToMany } from 'typeorm';
-import { IsEmail } from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 import { Device } from './device.entity';
 import { TableReport } from './table-report.entity';
 
@@ -7,6 +7,12 @@ import { TableReport } from './table-report.entity';
 export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
+
+    @Column({default: null})
+    FirstName: string;
+
+    @Column({default: null})
+    LastName: string;
 
     @Column()
     @IsEmail()

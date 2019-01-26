@@ -31,11 +31,11 @@
                                 <tbody>
                                     <tr *ngFor="let user of this.users; let i = index">
                                         <td>{{i + 1}}</td>
-                                        <td>{{user.email}}</td>
-                                        <td>{{user.email}}</td>
+                                        <td>{{user.FirstName}}</td>
+                                        <td>{{user.LastName}}</td>
                                         <td #email>{{user.email}}</td>
                                         <td>
-                                            <button mat-raised-button type="submit" class="btn btn-warning btn-sm"
+                                            <button #pass mat-raised-button type="submit" class="btn btn-warning btn-sm"
                                                 [routerLink]="['/users/edit']">Edit</button>
                                             <button mat-raised-button type="submit" class="btn btn-danger btn-sm"
                                                 (click)="this.deleteUser(user.email)">Delete</button>
