@@ -7,7 +7,7 @@
                         <h4 class="card-title">Add Device</h4>
                     </div>
                     <div class="card-body">
-                        <form [formGroup]="deviceForm" (ngSubmit)="this.addDevice()">
+                        <form [formGroup]="deviceForm" (ngSubmit)="this.add()">
                             <div class="form-group">
                                 <label appBoldMe for="name"></label>
                                 <input formControlName="name" required id="name" type="text" class="form-control"

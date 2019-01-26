@@ -18,4 +18,15 @@ export class DevicesService {
         return this.httpClient.get<DeviceViewModel[]>('http://localhost:3000/devices');
     }
 
+    getOne(id: string): Observable<DeviceViewModel> {
+        return this.httpClient.get<DeviceViewModel>(`http://localhost:3000/devices/${id}`);
+    }
+
+    edit(id: string, device: DeviceViewModel): Observable<DeviceViewModel> {
+        return this.httpClient.put<DeviceViewModel>(`http://localhost:3000/devices/${id}`, JSON.stringify(device));
+    }
+
+    delete(id: string) {
+        return this.httpClient.delete(`http://localhost:3000/devices/${id}`);
+    }
 }

@@ -37,9 +37,9 @@
                                         <td>{{device.longitude}}</td>
                                         <td>
                                             <button mat-raised-button type="submit" class="btn btn-warning btn-sm"
-                                                [routerLink]="['/devices/add']">Edit</button>
+                                                [routerLink]="['/devices', device.id, 'edit']">Edit</button>
                                             <button mat-raised-button type="submit" class="btn btn-danger btn-sm"
-                                                [routerLink]="['/devices/add']">Delete</button>
+                                                (click)="this.delete(device.id)">Delete</button>
                                         </td>
                                     </tr>
                                 </tbody>
