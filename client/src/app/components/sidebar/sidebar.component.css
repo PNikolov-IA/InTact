@@ -6,3 +6,7 @@ p {
     text-transform: uppercase;
     font-weight: 500;
 }
+
+div.logo::after {
+    background-color: rgba(119, 119, 119, 0.2);
+}

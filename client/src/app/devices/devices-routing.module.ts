@@ -1,7 +1,8 @@
-import { DeviceFormComponent } from './device-form/device-form.component';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { DeviceCreateFormComponent } from './device-create-form/device-create-form.component';
+import { DeviceEditFormComponent } from './device-edit-form/device-edit-form.component';
 
 const routes: Routes = [
     {
@@ -10,8 +11,12 @@ const routes: Routes = [
     },
     {
         path: 'add',
-        component: DeviceFormComponent,
-    }
+        component: DeviceCreateFormComponent,
+    },
+    {
+        path: ':id/edit',
+        component: DeviceEditFormComponent,
+    },
 ];
 
 @NgModule({

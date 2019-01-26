@@ -6,10 +6,10 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-device-form',
-  templateUrl: './device-form.component.html',
-  styleUrls: ['./device-form.component.scss']
+  templateUrl: './device-create-form.component.html',
+  styleUrls: ['./device-create-form.component.scss']
 })
-export class DeviceFormComponent implements OnInit, OnDestroy {
+export class DeviceCreateFormComponent implements OnInit, OnDestroy {
   deviceForm: FormGroup;
   private subscription;
 
@@ -34,7 +34,7 @@ export class DeviceFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  addDevice() {
+  add() {
     this.subscription = this.devicesService
       .add(this.deviceForm.value)
       .subscribe(() => {
