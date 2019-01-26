@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../core/services/users.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserViewModel } from '../../core/models/view-models/user.model';
 
 @Component({
   selector: 'app-users-edit',
@@ -11,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UsersEditComponent implements OnInit {
   editForm: FormGroup;
+  user: UserViewModel;
   private subscription;
 
 
@@ -18,17 +20,28 @@ export class UsersEditComponent implements OnInit {
     private usersService: UsersService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
+    private readonly route: ActivatedRoute,
     private readonly toastrService: ToastrService,
 
   ) { }
 
   ngOnInit() {
-    this.editForm = this.formBuilder.group({
-      FirstName: ['', [Validators.required]],
-      LastName: ['', [Validators.required]],
-      email: ['dd'],
-      password: ['ddd']
-    })
+    this.route.params.subscribe(params => {
+      this.usersService
+        .getOneUser(params['id'])
+        .subscribe((user: UserViewModel) => {
+          this.user = user;
+        }, () => {
+          this.toastrService.error('Something goes wrong!');
+          this.router.navigate([`/users/all`]);
+        }, () => {
+          this.editForm = this.formBuilder.group({
+            FirstName: [this.user.FirstName, [Validators.required]],
+            LastName: [this.user.LastName, [Validators.required]],
+            email: [this.user.email, [Validators.required]]
+          })
+        })
+    });
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
@@ -38,9 +51,9 @@ export class UsersEditComponent implements OnInit {
     }
   }
 
-  editUser() {
+  editUser(id: string) {
     this.subscription = this.usersService
-      .editUser(this.editForm.value)
+      .editUser(id, this.editForm.value)
       .subscribe(
         () => {
           this.toastrService.success('Successfully edited User!');
@@ -48,11 +61,11 @@ export class UsersEditComponent implements OnInit {
         },
         () => {
           this.toastrService.error('Editing failed!');
-          this.router.navigate(['/users/all']);
+          this.router.navigate([`/users/${id}/edit`]);
         });
   }
 
   cancel() {
-    this.router.navigate(['/users/all']);
+    this.router.navigate([`/users/all`]);
   }
 }

@@ -80,6 +80,12 @@ export class UsersService {
     return onlyUsers;
   }
 
+  async getById(id: string) {
+    const user = await this.usersRepository.findOne({ where: { id } });
+
+    return user;
+  }
+
   async addUser(user: UserRegisterDTO, admin: User) {
     const userFound = await this.usersRepository.findOne({ where: { email: user.email } });
     if (userFound) {
@@ -119,24 +125,6 @@ export class UsersService {
 
   }
 
-  async editUser(user: UserEditDTO, req): Promise<any> {
-
-    const userFound = await this.usersRepository
-      .findOne({ where: { email: user.email } });
-
-    if (userFound && (user.FirstName || user.LastName)) {
-      userFound.FirstName = user.FirstName;
-      userFound.LastName = user.LastName;
-    }
-    else {
-      throw new Error('No such user!');
-    }
-
-    // await this.usersRepository.create(newUser);
-    const result = await this.usersRepository.save(userFound);
-    return result;
-  }
-
   async changePassword(user: UserPasswordDTO, req): Promise<any> {
     const loggedUserId = req.user.id;
 
@@ -152,5 +140,32 @@ export class UsersService {
       throw new Error('password doesnt match');
     }
     await this.usersRepository.update(loggedUserId, userFound);
+  }
+
+  // ----------------- PN ---------------------
+  async editUser(id: string, user: UserEditDTO): Promise<any> {
+
+    const userFound = await this.usersRepository
+      .findOne({ where: { id } });
+
+    if (userFound) {
+      if (userFound.email !== user.email) {
+        throw new Error('Incorrect user data!');
+      }
+
+      if (user.FirstName || user.LastName) {
+        userFound.FirstName = user.FirstName;
+        userFound.LastName = user.LastName;
+      } else {
+        throw new Error('Incorrect user data!');
+      }
+    }
+    else {
+      throw new Error('No such user!');
+    }
+
+    // await this.usersRepository.create(newUser);
+    const result = await this.usersRepository.save(userFound);
+    return result;
   }
 }

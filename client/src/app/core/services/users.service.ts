@@ -1,3 +1,4 @@
+import { UserEditDTO } from './../../../../../server/src/models/user/user-edit.dto';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -16,14 +17,19 @@ export class UsersService {
             .get('http://localhost:3000/users')
     }
 
+    getOneUser(id: string): Observable<any> {
+        return this.httpClient
+            .get(`http://localhost:3000/users/${id}`)
+    }
+
     createUser(userData: UsersCreateDTO): Observable<any> {
         return this.httpClient
             .post('http://localhost:3000/users', JSON.stringify(userData))
     }
 
-    editUser(userData: UsersCreateDTO): Observable<any> {
+    editUser(id: string, userData: UsersCreateDTO): Observable<any> {
         return this.httpClient
-            .put('http://localhost:3000/users', JSON.stringify(userData))
+            .put(`http://localhost:3000/users/${id}`, JSON.stringify(userData))
     }
 
     deleteUser(email: UserDeleteDTO): Observable<any> {
