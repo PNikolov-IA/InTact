@@ -10,6 +10,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { RegisterComponent } from './auth/register/register.component';
 import { UsersComponent } from './users/users.component';
 import { RoleGuardService } from './core/guards/admin.guard';
+import { AuthGuardService } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -36,6 +37,16 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: './devices/devices.module#DevicesModule'
+      }]
+  },
+  {
+    path: 'reports',
+    canActivate: [AuthGuardService],
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: './reports/reports.module#ReportsModule'
       }]
   },
   {

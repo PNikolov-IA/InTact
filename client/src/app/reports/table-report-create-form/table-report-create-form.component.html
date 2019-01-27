@@ -1,0 +1,121 @@
+<div class="main-content vertical-center fullscreen">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Create Table Report</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="tableReportForm" (ngSubmit)="this.create()">
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input #pass matInput formControlName="name" type="text" placeholder="Name">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+
+                  <div class="col-md-5">
+                    <mat-form-field>
+                      <mat-select formControlName="period" placeholder="Period">
+                        <mat-option class="form-control" *ngFor="let period of periods" [value]="period.value">{{period.option}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-2 offset">
+                    <mat-checkbox [formControl]="disableSelect" labelPosition="after">
+                      Offset
+                    </mat-checkbox>
+                  </div>
+
+                  <div class="col-lg-5">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput [disabled]="!disableSelect.value" type="number" value="0" step="1" min="0"
+                            max="23" placeholder="Hours">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-lg-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput [disabled]="!disableSelect.value" type="number" value="0" step="1" min="0"
+                            max="23" placeholder="Days">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <!-- <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Assignee" aria-label="Assignee" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option.name}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field> -->
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>Devices:</p>
+                  </div>
+                </div>
+
+                <div class="row device-list">
+
+                  <div class="col-md-5">
+                    <mat-list role="list">
+                      <mat-list-item role="listitem">Item 1</mat-list-item>
+                      <mat-list-item role="listitem">Item 2</mat-list-item>
+                      <mat-list-item role="listitem">Item 3</mat-list-item>
+                      <mat-list-item role="listitem">Item 1</mat-list-item>
+                      <mat-list-item role="listitem">Item 2</mat-list-item>
+                      <mat-list-item role="listitem">Item 3</mat-list-item>
+                      <mat-list-item role="listitem">Item 1</mat-list-item>
+                      <mat-list-item role="listitem">Item 2</mat-list-item>
+                      <mat-list-item role="listitem">Item 3</mat-list-item>
+                    </mat-list>
+                  </div>
+
+                  <div class="col-md-1">
+                    <mat-icon matPrefix>arrow_back_ios</mat-icon>
+                  </div>
+                  <div class="col-md-1">
+                    <mat-icon matSuffix>arrow_forward_ios</mat-icon>
+                  </div>
+
+                  <div class="col-md-5">
+                    <mat-list role="list">
+                      <mat-list-item role="listitem">Item 1</mat-list-item>
+                      <mat-list-item role="listitem">Item 2</mat-list-item>
+                      <mat-list-item role="listitem">Item 3</mat-list-item>
+                      <mat-list-item role="listitem">Item 1</mat-list-item>
+                      <mat-list-item role="listitem">Item 2</mat-list-item>
+                      <mat-list-item role="listitem">Item 3</mat-list-item>
+                      <mat-list-item role="listitem">Item 1</mat-list-item>
+                      <mat-list-item role="listitem">Item 2</mat-list-item>
+                      <mat-list-item role="listitem">Item 3</mat-list-item>
+                    </mat-list>
+                  </div>
+
+                </div>
+              </div>
+
+              <button [disabled]="pass.value.length <= 5" type="submit" class="btn btn-danger">Create</button>
+              <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
