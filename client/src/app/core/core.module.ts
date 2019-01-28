@@ -8,6 +8,8 @@ import { AnonymousGuardService } from './guards/anonymous.guard';
 import { AuthGuardService } from './guards/auth.guard';
 import { RoleGuardService } from './guards/admin.guard';
 import { UsersService } from './services/users.service';
+import { DateConverterService } from './services/date-converter.service';
+import { ChartReportsService } from './services/chart-reports.service';
 
 @NgModule({
   providers: [
@@ -15,6 +17,9 @@ import { UsersService } from './services/users.service';
     StorageService,
     UsersService,
     DevicesService,
+    DateConverterService,
+    ChartReportsService,
+
     AnonymousGuardService,
     AuthGuardService,
     RoleGuardService,
@@ -28,8 +33,8 @@ import { UsersService } from './services/users.service';
 
 export class CoreModule {
   public constructor(@Optional() @SkipSelf() parent: CoreModule) {
-      if (parent) {
-          throw new Error('Core module is already provided!');
-      }
+    if (parent) {
+      throw new Error('Core module is already provided!');
+    }
   }
 }

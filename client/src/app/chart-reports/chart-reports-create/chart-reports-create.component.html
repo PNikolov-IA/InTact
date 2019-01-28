@@ -1,0 +1,68 @@
+<div class="main-content vertical-center fullscreen">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">New Chart Report</h4>
+              <p></p>
+            </div>
+            <div class="card-body">
+             
+                <form [formGroup]="createForm" (ngSubmit)="this.createChartReport()">
+                <div class="form-group">
+                  <label appBoldMe for="name"></label>
+                  <input formControlName="name" required id="name" type="text" class="form-control" placeholder="Name" />
+                  <div [hidden]="!(this.createForm.get('name').hasError('required') && this.createForm.dirty)">Required</div>
+                </div>
+              <br>  
+              <br>
+              <div>
+                <h4>Initial Date Range:</h4>
+                    From: <input type="text" 
+                    #dateFromDp="dpDayPicker"
+                    [dpDayPicker]="dayPickerConfig"
+                    [theme]="'dp-material'"
+                    formControlName="dateFrom"
+                    [mode]="All"
+                    (onChange)="date = $event" />
+
+                    To: <input type="text" 
+                    #dateToDp="dpDayPicker"
+                    [dpDayPicker]="dayPickerConfig"
+                    [displayDate]="displayDate"
+                    [theme]="'dp-material'"
+                    formControlName="dateTo"
+                    [mode]="All"
+                    (onChange)="date = $event" />
+              </div>
+              <div> 
+              <dp-time-select formControlName="hourFrom" config="config"></dp-time-select> 
+              <dp-time-select formControlName="hourTo" config="config"></dp-time-select>  
+              </div>
+                <br>
+                <br>
+                <div>
+                <h4>Dates To Compare:</h4>
+                    From: <input type="text" 
+                    #dateToDp="dpDayPicker"
+                    [dpDayPicker]="dayPickerConfig"
+                    [displayDate]="displayDate"
+                    [theme]="'dp-material'"
+                    formControlName="datesToCompare"
+                    [mode]="All"
+                    (onChange)="date = $event" />
+                   <button type="button" class="btn btn-success" (click)="this.add()">add</button>
+                </div>
+                <br>         
+                <br>
+                <button [disabled]="false" type="submit" class="btn btn-danger">create</button>
+                <button type="button" class="btn btn-default" (click)="this.cancel()">cancel</button>
+              </form> 
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

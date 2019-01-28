@@ -13,6 +13,10 @@ import { UsersEditComponent } from './users-edit/users-edit.component';
     UsersRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [UsersListComponent, UsersCreateComponent, UsersEditComponent]
+  declarations: [
+    UsersListComponent,
+    UsersCreateComponent,
+    UsersEditComponent
+  ]
 })
 export class UsersModule { }

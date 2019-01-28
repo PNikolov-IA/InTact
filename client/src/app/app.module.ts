@@ -1,3 +1,4 @@
+import { ChartReportsModule } from './chart-reports/chart-reports.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +36,8 @@ import { DevicesModule } from './devices/devices.module';
     AuthModule,
     CoreModule,
     DevicesModule,
+    UsersModule,
+    ChartReportsModule,
 
     BrowserAnimationsModule,
     FormsModule,

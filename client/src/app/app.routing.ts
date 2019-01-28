@@ -55,6 +55,15 @@ const routes: Routes = [
         path: '',
         loadChildren: './users/users.module#UsersModule'
       }]
+  },
+  {
+    path: 'chart-reports',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: './chart-reports/chart-reports.module#ChartReportsModule'
+      }]
   }
   // { path: 'dashboard',      component: DashboardComponent },
   // { path: 'user-profile',   component: UserProfileComponent },
