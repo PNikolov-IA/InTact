@@ -29,6 +29,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module';
 import { DevicesModule } from './devices/devices.module';
+import { ReportsModule } from './reports/reports.module';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { DevicesModule } from './devices/devices.module';
     DevicesModule,
     UsersModule,
     ChartReportsModule,
+    ReportsModule,
 
     BrowserAnimationsModule,
     FormsModule,

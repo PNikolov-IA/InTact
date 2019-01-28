@@ -13,7 +13,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/users/all', title: 'Users', icon: 'person', class: '' },
     { path: '/chart-reports/display', title: 'Chart Reports', icon: 'bar_chart', class: '' },
     { path: '/table-list', title: 'Table List', icon: 'content_paste', class: '' },
-    { path: '/typography', title: 'Typography', icon: 'library_books', class: '' },
+    { path: '/reports/all', title: 'Reports', icon: 'table_chart', class: '' },
     { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
     { path: '/notifications', title: 'Notifications', icon: 'notifications', class: '' },
     { path: '/devices/all', title: 'Devices', icon: 'router', class: '' },

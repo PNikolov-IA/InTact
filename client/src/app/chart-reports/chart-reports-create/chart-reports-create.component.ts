@@ -126,10 +126,10 @@ export class ChartReportsCreateComponent implements OnInit {
   add() {
     const dateStr = this.createForm.value.datesToCompare;
     console.log(this.createForm.value.hourFrom);
-    //console.log(this.selectedDate);
+    // console.log(this.selectedDate);
     // this.toTimestamp('02/13/2009 23:31:30')
-    //const dateToAdd: number = this.toTimestamp(dateStr);
-    //this.startDates.push(dateToAdd);
+    // const dateToAdd: number = this.toTimestamp(dateStr);
+    // this.startDates.push(dateToAdd);
   }
   cancel() {
     this.router.navigate(['/chart-reports/display']);
