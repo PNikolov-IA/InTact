@@ -1,27 +1,30 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { CoreModule } from 'app/core/core.module';
+import { SharedModule } from '../shared/shared.module';
+import { CardComponent } from './card/card.component';
+import { SubmitButtonComponent } from './submit-button/submit-button.component';
+import { EditButtonComponent } from './edit-button/edit-button.component';
+import { DeleteButtonComponent } from './delete-button/delete-button.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     RouterModule,
-    CoreModule
   ],
   declarations: [
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    CardComponent,
+    SubmitButtonComponent,
+    EditButtonComponent,
+    DeleteButtonComponent,
   ],
   exports: [
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    CardComponent,
+    SubmitButtonComponent,
+    EditButtonComponent,
+    DeleteButtonComponent,
   ]
 })
 export class ComponentsModule { }

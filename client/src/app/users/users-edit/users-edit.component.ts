@@ -32,13 +32,13 @@ export class UsersEditComponent implements OnInit {
         .subscribe((user: UserViewModel) => {
           this.user = user;
         }, () => {
-          this.toastrService.error('Something goes wrong!');
+          this.toastrService.error('Something went wrong!');
           this.router.navigate([`/users/all`]);
         }, () => {
           this.editForm = this.formBuilder.group({
             FirstName: [this.user.FirstName, [Validators.required]],
             LastName: [this.user.LastName, [Validators.required]],
-            email: [{ value: this.user.email, disabled: true }]
+            email: [ {value: this.user.email, disabled: true}, [Validators.required]]
           })
         })
     });

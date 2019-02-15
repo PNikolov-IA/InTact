@@ -10,7 +10,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
-  private users;
+  title = 'Users'
+  buttonName = 'New User';
+  users;
 
   constructor(
     private usersService: UsersService,
@@ -23,7 +25,6 @@ export class UsersListComponent implements OnInit {
       .getUsers()
       .subscribe((data) => {
         this.users = data;
-        console.log(this.users);
       });
   }
 
@@ -48,8 +49,8 @@ export class UsersListComponent implements OnInit {
               }
             });
           }, () => {
-            this.toastrService.error('Something goes wrong!');
-            this.router.navigate(['/users/all']);
+            this.toastrService.error('Something went wrong!');
+            this.router.navigate(['/users/create']);
           });
   };
 }

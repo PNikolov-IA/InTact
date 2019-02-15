@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CoreModule } from 'app/core/core.module';
+import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   imports: [
     SharedModule,
     ReactiveFormsModule,
-    CoreModule
+    AuthRoutingModule
   ],
   declarations: [
     RegisterComponent,

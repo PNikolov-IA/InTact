@@ -5,18 +5,16 @@ import { UsersCreateComponent } from './users-create/users-create.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersEditComponent } from './users-edit/users-edit.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
   imports: [
     SharedModule,
     UsersRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
-  declarations: [
-    UsersListComponent,
-    UsersCreateComponent,
-    UsersEditComponent
-  ]
+  declarations: [UsersListComponent, UsersCreateComponent, UsersEditComponent]
 })
 export class UsersModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/services/auth.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -8,16 +9,10 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
-    { path: '/user-profile', title: 'User Profile', icon: 'person', class: '' },
-    { path: '/users/all', title: 'Users', icon: 'person', class: '' },
-    { path: '/chart-reports/display', title: 'Chart Reports', icon: 'bar_chart', class: '' },
-    { path: '/table-list', title: 'Table List', icon: 'content_paste', class: '' },
-    { path: '/reports/all', title: 'Reports', icon: 'table_chart', class: '' },
-    { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
-    { path: '/notifications', title: 'Notifications', icon: 'notifications', class: '' },
+    { path: '/table-reports/all', title: 'Table Reports', icon: 'table_chart', class: '' },
+    { path: '/chart-reports/all', title: 'Chart Reports', icon: 'insert_chart', class: '' },
     { path: '/devices/all', title: 'Devices', icon: 'router', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO', icon: 'unarchive', class: 'active-pro' },
+    { path: '/users/all', title: 'Users', icon: 'person', class: '' },
 ];
 
 @Component({
@@ -28,15 +23,24 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
     menuItems: any[];
 
-    constructor() { }
+    constructor(
+        private readonly authService: AuthService
+    ) { }
 
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.menuItems = ROUTES.filter(menuItem => {
+            if (
+                (!this.authService.isAdmin() && menuItem.title === 'Users') ||
+                (!this.authService.isAdmin() && menuItem.title === 'Devices')
+            ) {
+                return;
+            }
+
+            return menuItem;
+        });
     }
-    isMobileMenu() {
-        if ($(window).width() > 991) {
-            return false;
-        }
-        return true;
-    };
+
+    logout() {
+        this.authService.logout();
+    }
 }

@@ -1,0 +1,10 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header (click)="createMarkers()">
+    <mat-panel-title>
+      {{tableReportName}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-delete-button class="float-right" (click)="this.delete(this.tableReport.id)"></app-delete-button>
+  <app-edit-button class="float-right" [routerLink]="['/table-reports', this.tableReport.id, 'edit']"></app-edit-button>
+  <app-table [tableReport]="this.tableReport"></app-table>
+</mat-expansion-panel>

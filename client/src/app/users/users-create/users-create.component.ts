@@ -11,7 +11,8 @@ import { UsersService } from '../../core/services/users.service';
 })
 export class UsersCreateComponent implements OnInit {
   createForm: FormGroup;
-  private subscription;
+  subscription;
+  buttonName: 'Create';
 
   constructor(
     private usersService: UsersService,
@@ -38,7 +39,6 @@ export class UsersCreateComponent implements OnInit {
   }
 
   createUser() {
-    console.log(this.createForm.value);
     this.subscription = this.usersService
       .createUser(this.createForm.value)
       .subscribe(

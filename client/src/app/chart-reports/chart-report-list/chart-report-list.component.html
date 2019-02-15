@@ -1,0 +1,44 @@
+<div class="main-content vertical-center fullscreen">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+
+<app-card [title]="this.cardTitle">
+<app-submit-button [buttonName]="this.buttonName" [routerLink]="['/chart-reports/create']"></app-submit-button>
+<br>
+<br>
+            <div class="card-body">
+                    <mat-accordion class="example-headers-align" >
+
+                        <mat-expansion-panel *ngFor="let chartReport of chartReportsData.chartReports; let i = index" [expanded]="step === i" (opened)="setStep(i)">
+                            <mat-expansion-panel-header  color="card-header-warning">
+                                <mat-panel-title>
+                                   {{i + 1}}. {{ chartReport.name }}
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                {{ chartReport.origin.name }} >>> {{ chartReport.destination.name }}
+                                    <mat-icon>bar_chart</mat-icon>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <app-delete-button class="float-right" (click)="this.deleteChartReport(chartReport.id)"></app-delete-button>
+                            <app-edit-button class="float-right" [routerLink]="['/chart-reports', chartReport.id,'edit']"></app-edit-button>
+                                                    
+                            <div>
+                            <br>
+                            <app-chart [chartSharedData]="this.chartReport" [chartDataXax]="this.chartDataXax[i]" [chartDataYax]="this.chartDataYax[i]"></app-chart>
+                                <mat-action-row>
+                                    <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                                    <button mat-button color="primary" (click)="nextStep()">Next</button>
+                                </mat-action-row>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+             </div>
+                    
+</app-card>
+
+</div>
+</div>
+</div>
+</div>

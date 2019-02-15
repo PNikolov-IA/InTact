@@ -42,7 +42,7 @@ export class DeviceCreateFormComponent implements OnInit, OnDestroy {
         this.router.navigate(['/devices/all']);
       }, () => {
         this.toastrService.error('Adding device failed!');
-        this.router.navigate(['/devices/add']);
+        this.router.navigate(['/devices/create']);
       });
   }
 

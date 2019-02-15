@@ -38,16 +38,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .register(this.registerForm.value)
       .subscribe(() => { }, () => {
         this.toastrService.error('Registration failed!');
-        this.router.navigate(['/register']);
+        this.router.navigate(['/auth/register']);
       }, () => {
         this.authService
           .login(this.registerForm.value)
           .subscribe(() => {
             this.toastrService.success('Registered successfully!');
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/table-reports/all']);
           }, () => {
             this.toastrService.error('Logged in failed!');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/auth/login']);
           });
       });
   }

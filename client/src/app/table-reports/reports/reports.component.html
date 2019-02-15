@@ -1,0 +1,36 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+        <app-card [title]="this.title">
+
+          <div class="row">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-12">
+                  <app-submit-button [buttonName]="this.buttonName" [routerLink]="['/table-reports/create']"></app-submit-button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-accordion class="example-headers-align">
+                    <app-table-report-panel *ngFor="let report of this.tableReports" [tableReportName]="report.name" [tableReport]="report" (sendIdEvent)="receiveReportId($event)"></app-table-report-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-5 map">
+
+              <app-map></app-map>
+
+            </div>
+          </div>
+
+        </app-card>
+
+      </div>
+    </div>
+  </div>
+</div>

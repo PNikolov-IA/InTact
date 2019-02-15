@@ -1,16 +1,11 @@
 import { AnonymousGuardService } from './core/guards/anonymous.guard';
-import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
-import { CommonModule, } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { UsersComponent } from './users/users.component';
 import { RoleGuardService } from './core/guards/admin.guard';
 import { AuthGuardService } from './core/guards/auth.guard';
+import { LayoutComponent } from './layouts/layout/layout.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -20,19 +15,18 @@ const routes: Routes = [
     canActivate: [AnonymousGuardService]
   },
   {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate: [AnonymousGuardService]
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-    canActivate: [AnonymousGuardService]
+    path: 'auth',
+    canActivate: [AnonymousGuardService],
+    children: [
+      {
+        path: '',
+        loadChildren: './auth/auth.module#AuthModule'
+      }]
   },
   {
     path: 'devices',
     canActivate: [RoleGuardService],
-    component: AdminLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '',
@@ -40,51 +34,37 @@ const routes: Routes = [
       }]
   },
   {
-    path: 'reports',
+    path: 'chart-reports',
     canActivate: [AuthGuardService],
-    component: AdminLayoutComponent,
+    component: LayoutComponent,
     children: [
       {
         path: '',
-        loadChildren: './reports/reports.module#ReportsModule'
+        loadChildren: './chart-reports/chart-reports.module#ChartReportsModule'
       }]
   },
   {
-    path: '',
-    component: AdminLayoutComponent,
+    path: 'table-reports',
+    canActivate: [AuthGuardService],
+    component: LayoutComponent,
     children: [
       {
         path: '',
-        loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+        loadChildren: './table-reports/table-reports.module#TableReportsModule'
       }]
   },
   {
     path: 'users',
-    component: AdminLayoutComponent,
+    canActivate: [RoleGuardService],
+    component: LayoutComponent,
     children: [
       {
         path: '',
         loadChildren: './users/users.module#UsersModule'
       }]
   },
-  {
-    path: 'chart-reports',
-    component: AdminLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './chart-reports/chart-reports.module#ChartReportsModule'
-      }]
-  }
-  // { path: 'dashboard',      component: DashboardComponent },
-  // { path: 'user-profile',   component: UserProfileComponent },
-  // { path: 'table-list',     component: TableListComponent },
-  // { path: 'typography',     component: TypographyComponent },
-  // { path: 'icons',          component: IconsComponent },
-  // { path: 'maps',           component: MapsComponent },
-  // { path: 'notifications',  component: NotificationsComponent },
-  // { path: 'upgrade',        component: UpgradeComponent },
-  // { path: '',               redirectTo: 'dashboard', pathMatch: 'full' }
+  { path: '404', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ];
 
 @NgModule({

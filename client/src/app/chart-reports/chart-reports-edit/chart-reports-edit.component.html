@@ -1,3 +1,69 @@
-<p>
-  chart-reports-edit works!
-</p>
+<div class="main-content vertical-center fullscreen">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Edit Chart Report</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="createForm">
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input matInput formControlName="name" type="text" placeholder="Name" required>
+                </mat-form-field>
+                <br>
+                <div class="row">
+                <div class="col-md-6"> 
+                    <mat-form-field>
+                      <mat-select formControlName="period" placeholder="Period" required>
+                        <mat-option class="form-control" *ngFor="let period of periods" [value]="period.value">{{period.option}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                <br>
+                  <div class="col-md-6">
+                    <mat-form-field>
+                      <mat-select *ngIf="devices" #options1 placeholder="Origin" formControlName="origin" required>
+                        <mat-option *ngFor="let origin of devices" [value]="origin.id">{{origin.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-select *ngIf="devices" #options2 placeholder="Destination" formControlName="destination" required>
+                        <mat-option *ngFor="let destination of devices" [value]="destination.id">{{destination.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <br>
+                <div class="row" >
+                <div class="col-md-6">
+                <div class="box box-solid box-info">* Choose five dates to edit Chart Report</div>
+                <angular2-date-picker formControlName="startDate" [settings]="settings"></angular2-date-picker>
+                 </div>
+                 <button type="button" class="btn btn-success" [disabled]="this.startDates.length > 4" (click)="this.addDate()">Add Date</button>
+                  <br>
+                  <br>
+                </div>
+              </div>
+                  <mat-nav-list>
+                    <mat-list-item *ngFor="let std of startDates">
+                      <a matLine href="...">{{ std }}</a>
+                        <button mat-icon-button (click)="deleteDate(std)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </mat-list-item>
+                  </mat-nav-list>
+              <br>
+              <br>   
+              <button (click)="this.editChartReport(this.id)" type="submit" class="btn btn-danger">Create</button>
+              <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

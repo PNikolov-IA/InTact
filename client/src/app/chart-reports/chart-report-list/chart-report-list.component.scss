@@ -1,0 +1,15 @@
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+  font-size: 1.10em;
+  
+  font-weight: 500;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+  color: #00838f;
+  font-size: 1.0em;
+}
+

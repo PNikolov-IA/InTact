@@ -2,11 +2,10 @@ import { UpdateTableReportDTO } from './../models/table-report/update-table-repo
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { TableReport } from '../data/entities/table-report.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In, Table } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateTableReportDTO } from '../models/table-report/create-table-report.dto';
 import { User } from '../data/entities/user.entity';
 import { Device } from '../data/entities/device.entity';
-import { ChartReport } from 'src/data/entities/chart-report.entity';
 
 @Injectable()
 export class TableReportsService {
@@ -17,13 +16,12 @@ export class TableReportsService {
         private readonly devicesRepository: Repository<Device>,
     ) { }
 
-    async getTableReportById(tableId: string): Promise<TableReport> {
-
+    async getOne(tableId: string): Promise<TableReport> {
         return await this.tableReportsRepository.findOne({ where: { id: tableId } });
     }
-    async getTableReports(): Promise<TableReport[]> {
 
-        return await this.tableReportsRepository.find();
+    async getTableReports(user: User): Promise<TableReport[]> {
+        return await this.tableReportsRepository.find({ where: { user } });
     }
 
     async confirmCurrentUser(userLogged, tableUser) {
@@ -41,7 +39,7 @@ export class TableReportsService {
 
         const startDate: number = endDate - (tableReportDTO.period * 3600 * 1000);
 
-        const devices: Device[] = await this.devicesRepository.find({ where: { name: In(tableReportDTO.deviceNames) } });
+        const devices: Device[] = await this.devicesRepository.findByIds(tableReportDTO.deviceIds);
 
         const tableReport: TableReport = new TableReport();
         tableReport.name = tableReportDTO.name;
@@ -55,42 +53,46 @@ export class TableReportsService {
     }
 
     async updateTableById(userLogged: User, tableId: string, updateTableReportDTO: UpdateTableReportDTO) {
-        const tableToUpdate: TableReport = await this.getTableReportById(tableId);
+        const tableToUpdate: TableReport = await this.getOne(tableId);
+
         this.confirmCurrentUser(userLogged, tableToUpdate.user);
 
-        if (!tableToUpdate) {
-            throw new Error(`Action not permitted! You have no table with id "${tableId}".`);
-        }
-        let endDate: number = Date.now();
+        tableToUpdate.name = updateTableReportDTO.name;
+        
+        // if (!tableToUpdate) {
+        //     throw new Error(`Action not permitted! You have no table with id "${tableId}".`);
+        // }
+        // let endDate: number = Date.now();
 
-        if (updateTableReportDTO.name) {
-            tableToUpdate.name = updateTableReportDTO.name;
-        }
-        if (updateTableReportDTO.period) {
-            const startDate: number = endDate - (updateTableReportDTO.period * 3600 * 1000);
-            tableToUpdate.startDateInMilliseconds = startDate;
-        }
-        if (updateTableReportDTO.offset) {
-            endDate -= ((updateTableReportDTO.offset.days * 24) + updateTableReportDTO.offset.hours) * 3600 * 1000;
-            tableToUpdate.endDateInMilliseconds = endDate;
-        }
-        if (updateTableReportDTO.deviceNames) {
-            const devices: string[] = updateTableReportDTO.deviceNames;
-            const devicesToPush: Device[] = [];
-            await Promise.all(devices.map(async (deviceName) => {
-                const deviceFound: Device = await this.devicesRepository.findOne({ where: { name: deviceName } });
-                if (!deviceFound) {
-                    throw new BadRequestException(`No device with name "${deviceName}" found in database.`);
-                }
-                devicesToPush.push(deviceFound);
-            }));
+        // if (updateTableReportDTO.name) {
+        //     tableToUpdate.name = updateTableReportDTO.name;
+        // }
+        // if (updateTableReportDTO.period) {
+        //     const startDate: number = endDate - (updateTableReportDTO.period * 3600 * 1000);
+        //     tableToUpdate.startDateInMilliseconds = startDate;
+        // }
+        // if (updateTableReportDTO.offset) {
+        //     endDate -= ((updateTableReportDTO.offset.days * 24) + updateTableReportDTO.offset.hours) * 3600 * 1000;
+        //     tableToUpdate.endDateInMilliseconds = endDate;
+        // }
+        // if (updateTableReportDTO.deviceNames) {
+        //     const devices: string[] = updateTableReportDTO.deviceNames;
+        //     const devicesToPush: Device[] = [];
+        //     await Promise.all(devices.map(async (deviceName) => {
+        //         const deviceFound: Device = await this.devicesRepository.findOne({ where: { name: deviceName } });
+        //         if (!deviceFound) {
+        //             throw new BadRequestException(`No device with name "${deviceName}" found in database.`);
+        //         }
+        //         devicesToPush.push(deviceFound);
+        //     }));
 
-            tableToUpdate.devices = devicesToPush;
-        }
+        //     tableToUpdate.devices = devicesToPush;
+        // }
+
         await this.tableReportsRepository.update(tableId, tableToUpdate);
         await this.tableReportsRepository.save(tableToUpdate);
 
-        return `Table report with id "${tableId}" was successfully updated.`;
+        return JSON.stringify(`Table report with id "${tableId}" was successfully updated.`);
     }
 
     async deleteTableById(userLogged, tableId) {
@@ -101,6 +103,6 @@ export class TableReportsService {
         }
         await this.tableReportsRepository.delete(tableId);
 
-        return `Table report with id "${tableId}" was successfully deleted.`;
+        return JSON.stringify(`Table report with id "${tableId}" was successfully deleted.`);
     }
 }

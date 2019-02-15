@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { UserLoginDTO } from '../models/input-models/user-login.dto';
+import decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -43,5 +44,16 @@ export class AuthService {
 
     private hasToken(): boolean {
         return !!this.storageService.getItem('jwtToken');
+    }
+
+    isAdmin(): boolean {
+        const token = this.storageService.getItem('jwtToken');
+        const tokenPayload = decode(token);
+
+        if (!this.isLoggedIn$() || !tokenPayload.isAdmin) {
+            return false;
+        }
+
+        return true;
     }
 }

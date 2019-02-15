@@ -1,0 +1,15 @@
+<form [formGroup]="dialogForm">
+  <p>Set expected travel time range.</p>
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <input matInput formControlName="bestCase" type="number" value="0" step="1" min="0" placeholder="Lower limit">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput formControlName="worstCase" type="number" value="0" step="1" min="0" placeholder="Upper limit">
+    </mat-form-field>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" class="btn btn-success btn-sm" (click)="setTimeLimit()">Save</button>
+        <button mat-raised-button type="submit" class="btn btn-default btn-sm" (click)="onNoClick()">Cancel</button>
+    </div>
+  </div>
+</form>

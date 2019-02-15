@@ -29,7 +29,7 @@ export class DeviceEditFormComponent implements OnInit {
         .subscribe((device: DeviceViewModel) => {
           this.device = device;
         }, () => {
-          this.toastrService.error('Something goes wrong!');
+          this.toastrService.error('Something went wrong!');
           this.router.navigate([`/devices/all`]);
         }, () => {
           this.deviceForm = this.formBuilder.group({

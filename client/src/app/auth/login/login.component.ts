@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .login(this.loginForm.value)
       .subscribe(() => {
         this.toastrService.success('Logged in successfully!');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/table-reports/all']);
       },
       () => {
         this.toastrService.error('Login failed!');

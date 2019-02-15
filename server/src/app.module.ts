@@ -6,6 +6,7 @@ import { CoreModule } from './common/core/core.module';
 import { DatabaseModule } from './database/database.module';
 import { TableReportsModule } from './table-reports/table-reports.module';
 import { DevicesModule } from './devices/devices.module';
+import { ChartReportsModule } from './chart-reports/chart-reports.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { DevicesModule } from './devices/devices.module';
     DatabaseModule,
     TableReportsModule,
     DevicesModule,
+    ChartReportsModule,
   ],
   controllers: [],
   providers: [],

@@ -15,16 +15,17 @@
                                 <div [hidden]="!(this.deviceForm.get('name').hasError('required') && this.deviceForm.dirty)">Required</div>
                             </div>
                             <div class="form-group">
+                                <label appBoldMe for="latitude"></label>
+                                <input #pass formControlName="latitude" required id="latitude" type="text" class="form-control"
+                                    placeholder="Latitude" />
+                            </div>
+                            <div class="form-group">
                                 <label appBoldMe for="longitude"></label>
                                 <input #pass formControlName="longitude" required id="longitude" type="text" class="form-control"
                                     placeholder="Longitude" />
                             </div>
-                            <div class="form-group">
-                                    <label appBoldMe for="latitude"></label>
-                                    <input #pass formControlName="latitude" required id="latitude" type="text" class="form-control"
-                                        placeholder="Latitude" />
-                                </div>
-                            <button [disabled]="pass.value.length <= 5" type="submit" class="btn btn-danger">Add</button>
+
+                            <button [disabled]="pass.value.length <= 5" type="submit" class="btn btn-danger">Create</button>
                             <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
                         </form>
                     </div>

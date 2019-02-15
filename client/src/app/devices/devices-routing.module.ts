@@ -10,7 +10,7 @@ const routes: Routes = [
         component: DeviceListComponent,
     },
     {
-        path: 'add',
+        path: 'create',
         component: DeviceCreateFormComponent,
     },
     {

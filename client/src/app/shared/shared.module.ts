@@ -11,8 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ToastrModule.forRoot({
       closeButton: true,
-      timeOut: 5000,
-      positionClass: 'toast-top-center',
+      timeOut: 4000,
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
   ],

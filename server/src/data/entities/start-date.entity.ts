@@ -1,5 +1,5 @@
 import { Column, PrimaryGeneratedColumn, Entity, ManyToMany } from 'typeorm';
-import { IsDate, IsNumber } from 'class-validator';
+import { IsNumber } from 'class-validator';
 import { ChartReport } from './chart-report.entity';
 
 @Entity({ name: 'start_dates' })

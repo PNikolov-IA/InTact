@@ -19,7 +19,7 @@ export class AnonymousGuardService implements CanActivate {
             .pipe(
                 map((isLogged: boolean) => {
                     if (isLogged) {
-                        this.router.navigate(['dashboard']);
+                        this.router.navigate(['/table-reports/all']);
                         this.toastrService.error(
                             'You must not be logged-in in order to access this page!'
                         );

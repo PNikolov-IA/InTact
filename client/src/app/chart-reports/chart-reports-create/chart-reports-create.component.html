@@ -1,68 +1,69 @@
-<div class="main-content vertical-center fullscreen">
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-md-7">
-          <div class="card">
-            <div class="card-header card-header-danger">
-              <h4 class="card-title">New Chart Report</h4>
-              <p></p>
-            </div>
-            <div class="card-body">
-             
-                <form [formGroup]="createForm" (ngSubmit)="this.createChartReport()">
-                <div class="form-group">
-                  <label appBoldMe for="name"></label>
-                  <input formControlName="name" required id="name" type="text" class="form-control" placeholder="Name" />
-                  <div [hidden]="!(this.createForm.get('name').hasError('required') && this.createForm.dirty)">Required</div>
+  <div class="main-content vertical-center fullscreen">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Create Chart Report</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="createForm">
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input #pass matInput formControlName="name" type="text" placeholder="Name">
+                </mat-form-field>
+                <br>
+                <div class="row">
+                <div class="col-md-6"> 
+                    <mat-form-field>
+                      <mat-select formControlName="period" placeholder="Period">
+                        <mat-option class="form-control" *ngFor="let period of periods" [value]="period.value">{{period.option}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                <br>
+                  <div class="col-md-6">
+                    <mat-form-field>
+                      <mat-select #options1 placeholder="Origin" formControlName="origin">
+                        <mat-option *ngFor="let origin of devices" [value]="origin.id">{{origin.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-select #options2 placeholder="Destination" formControlName="destination">
+                        <mat-option *ngFor="let destination of devices" [value]="destination.id">{{destination.name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
                 </div>
-              <br>  
+                <br>
+                <div class="row" >
+                <div class="col-md-6">
+                <div class="box box-solid box-info">* Choose five dates to create Chart Report</div>
+                <angular2-date-picker formControlName="startDate" [settings]="settings"></angular2-date-picker> 
+                 </div>
+                 <button type="button" class="btn btn-success" [disabled]="this.startDates.length > 4" (click)="this.addDate()">Add Date</button>
+                  <br>
+                  <br>
+                </div>
+              </div>
+                  <mat-nav-list>
+                    <mat-list-item *ngFor="let std of startDates">
+                      <a matLine href="...">{{ std }}</a>
+                        <button mat-icon-button (click)="deleteDate(std)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </mat-list-item>
+                  </mat-nav-list>
               <br>
-              <div>
-                <h4>Initial Date Range:</h4>
-                    From: <input type="text" 
-                    #dateFromDp="dpDayPicker"
-                    [dpDayPicker]="dayPickerConfig"
-                    [theme]="'dp-material'"
-                    formControlName="dateFrom"
-                    [mode]="All"
-                    (onChange)="date = $event" />
-
-                    To: <input type="text" 
-                    #dateToDp="dpDayPicker"
-                    [dpDayPicker]="dayPickerConfig"
-                    [displayDate]="displayDate"
-                    [theme]="'dp-material'"
-                    formControlName="dateTo"
-                    [mode]="All"
-                    (onChange)="date = $event" />
-              </div>
-              <div> 
-              <dp-time-select formControlName="hourFrom" config="config"></dp-time-select> 
-              <dp-time-select formControlName="hourTo" config="config"></dp-time-select>  
-              </div>
-                <br>
-                <br>
-                <div>
-                <h4>Dates To Compare:</h4>
-                    From: <input type="text" 
-                    #dateToDp="dpDayPicker"
-                    [dpDayPicker]="dayPickerConfig"
-                    [displayDate]="displayDate"
-                    [theme]="'dp-material'"
-                    formControlName="datesToCompare"
-                    [mode]="All"
-                    (onChange)="date = $event" />
-                   <button type="button" class="btn btn-success" (click)="this.add()">add</button>
-                </div>
-                <br>         
-                <br>
-                <button [disabled]="false" type="submit" class="btn btn-danger">create</button>
-                <button type="button" class="btn btn-default" (click)="this.cancel()">cancel</button>
-              </form> 
-
-            </div>
+              <br>   
+              <button [disabled]="this.startDates.length < 5" (click)="this.createChartReport()" type="submit" class="btn btn-danger">Create</button>
+              <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="main-content">
+  <div class="container-fluid" id="demobox">
+      <div class="row">
+          <div class="col-md-12">
+          <button type="button" class="btn btn-info btn-sm" (click)="this.lineChart()">Line Chart</button>
+          <button type="button" class="btn btn-info btn-sm" (click)="this.barChart()">Bar Chart</button>
+          <button type="button" class="btn btn-info btn-sm" (click)="this.radarChart()">Radar Chart</button>
+
+          <button type="button" class="btn btn-primary btn-sm float-right" (click)="this.openDialog()">Chart Table Info</button>    
+            <div>
+              <div tyle="display: block" *ngIf="linearChartData.length > 0 && this.chart === undefined">
+              <div *ngIf="isDataAvailable">
+                <canvas baseChart #baseChart="base-chart" id="chart" 
+                [datasets]="linearChartData"
+                [labels]="linearChartLabels"
+                [options]="linearChartOptions"
+                [legend]="linearChartLegend"
+                [chartType]="linearChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+              </canvas>
+              </div>
+            </div>
+          </div>
+        </div>          
+      </div>
+  </div>
+</div>

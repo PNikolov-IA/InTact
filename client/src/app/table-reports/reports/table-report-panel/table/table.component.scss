@@ -1,0 +1,28 @@
+th {
+    font-weight: bold !important;
+}
+
+.th-device {
+    font-size: 17px;
+}
+
+td {
+    text-align: center;
+}
+
+.h-device {
+    text-align: center;
+}
+
+table {
+    color: rgb(88, 87, 87);
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: rgb(232, 240, 230);
+}
+
+.table-hover.table-hover-cells > tbody > tr:hover,
+.table-hover.table-hover-cells > tbody > tr:hover > td:hover {
+  background-color: #d0ebc4;
+}

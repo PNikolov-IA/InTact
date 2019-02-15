@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./device-list.component.scss']
 })
 export class DeviceListComponent implements OnInit {
+  buttonName = 'New Device';
+  title = 'Devices';
   devices: DeviceViewModel[]
 
   constructor(

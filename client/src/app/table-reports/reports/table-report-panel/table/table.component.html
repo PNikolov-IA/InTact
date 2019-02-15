@@ -1,0 +1,18 @@
+<table class="table table-bordered table-secondary table-striped table-hover table-hover-cells">
+  <thead>
+    <tr>
+      <th class="th-device" scope="col">
+        Origin \ Destination
+      </th>
+      <th class="th-device h-device" scope="col" *ngFor="let header of this.tableReportData | keyvalue">
+        {{header.key}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of this.tableReportData | keyvalue">
+      <th class="th-device" scope="row">{{row.key}}</th>     
+      <td (contextmenu)="openDialog(row.key, row.value, item.value)" *ngFor="let item of row.value | keyvalue" (click)="setView(row.key, row.value, item.value)">{{item.value}}</td>
+    </tr>
+  </tbody>
+</table>

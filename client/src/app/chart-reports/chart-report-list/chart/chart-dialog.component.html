@@ -1,0 +1,29 @@
+
+<h1 mat-dialog-title> Chart report info:</h1>
+<div mat-dialog-content>
+  <ul>
+    <li>
+      <span *ngIf="data.name">Name:  {{data.name}}</span>
+    </li>
+    <li>
+      <span *ngIf="data.period">Period:  {{data.period}} hours</span>
+    </li>  
+    <li>
+      <span *ngIf="data.origin">Origin:  {{data.origin}}</span>
+      </li>
+    <li>
+      <span *ngIf="data.destination">Destination:  {{data.destination}}</span>
+    </li>
+    <li>
+      <span>Start Dates: </span>
+    </li>
+     <tbody>
+        <tr *ngFor="let date of data.dates; let i = index">
+            <td>{{i + 1}}. {{date}}</td>
+        </tr>
+     </tbody>
+    <div mat-dialog-actions>
+  <button mat-button *ngIf="router !== '/chart-reports/all'" [mat-dialog-close]="data.name" cdkFocusInitial>Ok</button>
+</div>
+  </ul> 
+</div>

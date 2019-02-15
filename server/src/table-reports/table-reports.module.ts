@@ -9,11 +9,10 @@ import { TableReportsController } from './table-reports.controller';
 import { TableReport } from '../data/entities/table-report.entity';
 import { Device } from '../data/entities/device.entity';
 import { ApiService } from './api.service';
-import { ChartReportsService } from './chart-reports/chart-reports.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TableReport, Device, ChartReport, StartDate]), CoreModule, AuthModule, HttpModule],
-  providers: [TableReportsService, ApiService, ChartReportsService],
+  imports: [TypeOrmModule.forFeature([TableReport, Device, StartDate]), CoreModule, AuthModule, HttpModule],
+  providers: [TableReportsService, ApiService],
   exports: [],
   controllers: [TableReportsController],
 })

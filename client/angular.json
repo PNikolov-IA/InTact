@@ -25,7 +25,8 @@
               "src/assets/scss/material-dashboard.scss",
               "src/assets/css/demo.css",
               "src/assets/css/css.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "./src/assets/css/leaflet.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
